@@ -51,6 +51,8 @@ This starter runs via *SpringBoot* using the `maven` command:
 
 The application will be available at http://localhost:8081
 
+You can do the login action trying with any email and password.
+
 == Configure API REST access
 
 In the class `com.bresit.primefaces.algorithms.front.example.api_config.ApiRestConfig`
