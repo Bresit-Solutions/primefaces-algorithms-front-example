@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="#{layoutMB.template}">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h2 class="align-center">
+            Welcome to the <span class="text-aqua"> <i><a href="https://bresit.com"
+                                                          target="_blank"
+                                                          style="text-transform: none;text-decoration: none"> Bresit Solutions</a></i></span> Algorithms Example!
+            <br/>
+            <small>Integrating <p:link value="Primefaces" target="_blank" href="http://primefaces.org"/>, <p:link value="Bootstrap" target="_blank"
+                                                                                                  href="http://getbootstrap.com/"/> and
+                <p:link value="Admin LTE" target="_blank" href="https://adminlte.io/"/> into this
+                <p:link value="JSF" target="_blank" href="https://javaserverfaces.java.net/"/> application that consumes a
+                <p:link value="REST API"  target="_blank" href="https://github.com/Bresit-Solutions/rest-api-algorithms-back-example"/> and runs with
+                <p:link value="Spring Boot"  target="_blank" href="https://spring.io/projects/spring-boot"/>.
+            </small>
+        </h2>
+
+    </ui:define>
+
+
+</ui:composition>

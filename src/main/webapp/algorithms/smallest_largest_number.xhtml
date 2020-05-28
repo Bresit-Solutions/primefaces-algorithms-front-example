@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="body">
+        <h1 id="algorithms-challenge">Smallest and Largest Number</h1>
+        <ul>
+            <li><p>Find smallest and largest number in an integer array</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:remoteCommand name="addNumberToList" actionListener="#{smallestLargestNumberController.addNumberToList()}" update="@form"/>
+            <p:focus context="@form"/>
+            <p:panel styleClass="box-primary card">
+                <div class="ui-fluid">
+                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="number" value="Introduce a number and press Enter to add it to the list"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputNumber id="number" decimalPlaces="0" value="#{smallestLargestNumberController.number}"
+                                           requiredMessage="Required field"
+                                           onkeypress="if (event.keyCode == 13) { addNumberToList(); return false; }"
+                            >
+                            </p:inputNumber>
+                            <span class="help-block">
+                                <p:message for="number"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:dataList id="listNumbers" value="#{smallestLargestNumberController.listNumbers}" var="number">
+                                <f:facet name="header">
+                                    Numbers List
+                                </f:facet>
+                                #{number}
+                            </p:dataList>
+                        </div>
+                        <span class="help-block">
+                            <p:message for="listNumbers"/>
+                        </span>
+                    </div>
+                </div>
+
+                <p:separator/>
+
+                <div id="main-buttons">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:commandButton value="Find Smallest and Largest Number" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"
+                                         actionListener="#{smallestLargestNumberController.findSmallestLargestNumber}"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Clear List" update="@form" icon="fa fa-close"
+                                         styleClass="btn-fatal"
+                                         actionListener="#{smallestLargestNumberController.clearList()}"/>
+                    </div>
+                </div>
+
+                <p:spacer height="5"/>
+
+                <p:fieldset legend="Result">
+                    <div class="ui-fluid">
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <p:outputLabel value="Smallest Number: " style="font-weight: bold">
+                                <p:outputLabel value="#{smallestLargestNumberController.result.smallest}">
+                                    <f:convertNumber type="number" groupingUsed="false" />
+                                </p:outputLabel>
+                            </p:outputLabel>
+                        </div>
+                        <p:spacer height="5"/>
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <p:outputLabel value="Largest Number: " style="font-weight: bold">
+                                <p:outputLabel value="#{smallestLargestNumberController.result.largest}">
+                                    <f:convertNumber type="number" groupingUsed="false" />
+                                </p:outputLabel>
+                            </p:outputLabel>
+                        </div>
+                    </div>
+                </p:fieldset>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

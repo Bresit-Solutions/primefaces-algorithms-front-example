@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="body">
+        <h1 id="algorithms-challenge">Highest Repeating Word</h1>
+        <ul>
+            <li><p>Find highest repeating word from a text file.</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:focus context="@form"/>
+            <p:panel styleClass="box-primary card">
+                <div class="ui-fluid">
+                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel value="Upload .txt or .log file"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:fileUpload id="txtFile"
+                                          allowTypes="/(\.|\/)(txt|log)$/"
+                                          fileUploadListener="#{highestRepeatingWordController.handleFileUpload}"
+                                          dragDropSupport="false"
+                                          required="true"
+                                          multiple="false"
+                                          sizeLimit="1024000"
+                                          update="@form"
+                                          fileLimit="1"
+                                          uploadLabel="Find highest repeating word"
+                            />
+                            <span class="help-block">
+                                <p:message for="txtFile"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p:separator/>
+
+                <p:spacer height="5"/>
+
+                <p:fieldset legend="Result">
+                    <div class="ui-fluid">
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel value="Highest Repeating Word: " style="font-weight: bold">
+                                    <p:outputLabel value="#{highestRepeatingWordController.result.word}">
+                                        <f:convertNumber type="number" groupingUsed="false" />
+                                    </p:outputLabel>
+                                </p:outputLabel>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel value="Times repeated: " style="font-weight: bold">
+                                    <p:outputLabel value="#{highestRepeatingWordController.result.timesRepeated}">
+                                        <f:convertNumber type="number" groupingUsed="false" />
+                                    </p:outputLabel>
+                                </p:outputLabel>
+                            </div>
+                        </div>
+                        <br/><br/><br/>
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel for="result" value="File content"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:inputTextarea id="result" value="#{highestRepeatingWordController.fileContent}"
+                                                 rows="3"
+                                                 readonly="true" >
+                                </p:inputTextarea>
+                                <span class="help-block">
+                                    <p:message for="result"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </p:fieldset>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

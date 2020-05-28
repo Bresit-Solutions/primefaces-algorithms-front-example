@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="body">
+        <h1 id="algorithms-challenge">Fibonacci</h1>
+        <ul>
+            <li><p>Print Fibonacci series up to a given number with memoization technique.</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:focus context="@form"/>
+            <p:panel styleClass="box-primary card">
+                <div class="ui-fluid">
+                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="number" value="Introduce a number"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputNumber id="number" decimalPlaces="0" value="#{fibonacciController.number}"
+                                           required="true" requiredMessage="Required field">
+                            </p:inputNumber>
+                            <span class="help-block">
+                                <p:message for="number"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p:separator/>
+
+                <div id="main-buttons">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:commandButton value="Recursive" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"
+                                         actionListener="#{fibonacciController.calculate('RECURSIVE')}"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Memoization HashMap" update="@form" icon="fa fa-check"
+                                         styleClass="btn-warning"
+                                         actionListener="#{fibonacciController.calculate('MEMO_HASHMAP')}"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Memoization Spring Cache" update="@form" icon="fa fa-check"
+                                         styleClass="btn-success"
+                                         actionListener="#{fibonacciController.calculate('MEMO_SPRING_CACHE')}"/>
+                    </div>
+                </div>
+
+                <p:spacer height="5"/>
+
+                <p:fieldset legend="Result">
+                    <div class="ui-fluid">
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel value="Time (miliseconds): " style="font-weight: bold">
+                                    <p:outputLabel value="#{fibonacciController.result.timeInMiliseconds}">
+                                        <f:convertNumber type="number" groupingUsed="false" />
+                                    </p:outputLabel>
+                                </p:outputLabel>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:outputLabel for="result" value="Fibonacci Result"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-12">
+                                <p:inputTextarea id="result" value="#{fibonacciController.result.result}"
+                                               readonly="true" >
+                                </p:inputTextarea>
+                                <span class="help-block">
+                                    <p:message for="result"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </p:fieldset>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
